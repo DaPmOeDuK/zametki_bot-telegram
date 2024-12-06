@@ -26,7 +26,7 @@ def start(m: Message):
 
 
 def new_usr(m: Message):
-    db = users.read_all()
+    db = zaetki.read_all()
     for i in db:
         if m.chat.id == i[0]:
             return False
