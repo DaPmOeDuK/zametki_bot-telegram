@@ -13,8 +13,12 @@ clear = RKR()
 def start(m: Message):
     if new_usr(m):
         temp[m.chat.id] = {}
-        bot.send_message(m.chat.id, "Назовите Ваше имя")
-        bot.register_next_step_handler(m, reg)
+        zametkil = []
+        zametkil.append(m.chat.id)
+        zametkil.append([])
+        zametkil.append([])
+        zametki.write(zametkil)
+        menu(m)
         return
     else:
         menu(m)
@@ -73,17 +77,6 @@ def check_zam(m:Message):
     menu(m)
     return
 
-def reg(m: Message):
-    user = [m.chat.id, m.text]
-    users.write(user)
-    zametkil = []
-    zametkil.append(m.chat.id)
-    zametkil.append([])
-    zametkil.append([])
-    zametki.write(zametkil)
-    menu(m)
-    return
-
 
 def reg1(m:Message):
     if m.text == "Добавить заметку":
@@ -110,7 +103,7 @@ def reg_new_zam(m:Message):
 
 def reg_compl_zam(m:Message):
     zametkil = zametki.read("user_id", m.chat.id)
-    zametkil[1].pop(zametkil.index(m.text))
+    zametkil[1].pop(zametkil[1].index(m.text))
     zametkil[2].append(m.text)
     zametki.write(zametkil)
     bot.send_message(m.chat.id,"Заметка добавлена в выполненные")
